@@ -5,6 +5,7 @@ class BankAccount {
     private String accountNumber;
     private double balance;
     private List<Transaction> transactionHistory;
+    private static BankAccount instance;
 
     public BankAccount(String accountNumber) {
         this.accountNumber = accountNumber;
@@ -43,21 +44,10 @@ class BankAccount {
         return balance;
     }
 
-    public class Transaction {
-        private String type;
-        private double amount;
-
-        public Transaction(String type, double amount) {
-            this.type = type;
-            this.amount = amount;
+    public static BankAccount getInstance() {
+        if (instance == null) {
+            instance = new BankAccount(null);
         }
-
-        @Override
-        public String toString() {
-            return "Transaction{" +
-                    "type='" + type + '\'' +
-                    ", amount=" + amount +
-                    '}';
-        }
+        return instance;
     }
 }
