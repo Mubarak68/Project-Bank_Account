@@ -1,66 +1,63 @@
-public class BankAccount {
-    private int accountNumber;
+import java.util.ArrayList;
+import java.util.List;
+
+class BankAccount {
+    private String accountNumber;
     private double balance;
-    private int transactionHistory;
-    private double deposit;
-    private double withdrawal;
+    private List<Transaction> transactionHistory;
 
-    public BankAccount(int accountNumber, double balance, int transactionHistory) {
+    public BankAccount(String accountNumber) {
         this.accountNumber = accountNumber;
-        this.balance = balance;
-        this.transactionHistory = transactionHistory;
+        this.balance = 0.0;
+        this.transactionHistory = new ArrayList<>();
     }
 
-    public int getAccountNumber() {
-        return accountNumber;
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            transactionHistory.add(new Transaction("Deposit", amount));
+            System.out.println("Deposit successful. New balance: $" + balance);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            transactionHistory.add(new Transaction("Withdrawal", amount));
+            System.out.println("Withdrawal successful. New balance: $" + balance);
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient funds.");
+        }
+    }
+
+    public void displayTransactionHistory() {
+        System.out.println("Transaction History for Account " + accountNumber + ":");
+        for (Transaction transaction : transactionHistory) {
+            System.out.println(transaction);
+        }
     }
 
     public double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public class Transaction {
+        private String type;
+        private double amount;
+
+        public Transaction(String type, double amount) {
+            this.type = type;
+            this.amount = amount;
+        }
+
+        @Override
+        public String toString() {
+            return "Transaction{" +
+                    "type='" + type + '\'' +
+                    ", amount=" + amount +
+                    '}';
+        }
     }
-
-    public double getTransactionHistory() {
-        return transactionHistory;
-    }
-
-    public void setTransactionHistory(int transactionHistory) {
-        this.transactionHistory = transactionHistory;
-    }
-
-    // public double deposit() {
-    // double amount = 0;
-    // balance += amount;
-    // return balance;
-    // }
-
-    // public double withdrawal() {
-    // return balance;
-    // }
-
-    public double getDeposit() {
-        return deposit;
-    }
-
-    public void setDeposit(double deposit) {
-        this.deposit = deposit;
-        balance += deposit;
-    }
-
-    public double getWithdrawal() {
-        return withdrawal;
-    }
-
-    public void setWithdrawal(double withdrawal) {
-        this.withdrawal = withdrawal;
-        balance -= withdrawal;
-    }
-
 }

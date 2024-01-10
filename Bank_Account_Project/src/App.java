@@ -1,18 +1,37 @@
-public class App {
-    public static void main(String[] args) throws Exception {
-        BankAccount bankAccount1 = new BankAccount(0, 0, 0);
-        bankAccount1.setAccountNumber(011017351);
-        bankAccount1.setBalance(310827.23);
-        bankAccount1.setTransactionHistory(253);
-        bankAccount1.setDeposit(2435.876);
-        bankAccount1.setWithdrawal(677.12);
+import java.util.Scanner;
 
-        System.out.println("The total balance: " + bankAccount1.getBalance());
-        System.out.println("The account number: " + bankAccount1.getAccountNumber());
-        System.out.println("The entered depoist is : " + bankAccount1.getDeposit());
-        System.out.println("The entered withdrawal amount is : " + bankAccount1.getWithdrawal());
-        System.out.println("Transaction history: " + bankAccount1.getTransactionHistory());
-        System.out.println("The total balance: " + bankAccount1.getBalance());
+public class App {
+    public static void main(String[] args) {
+        String myAccountNumber = "11211234";
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+
+            try {
+                System.out.print("Enter account number: ");
+                String accountNumber = scanner.nextLine();
+                BankAccount myAccount = new BankAccount(accountNumber);
+
+                if (accountNumber.equals(myAccountNumber)) {
+                    myAccount.deposit(1000);
+                    myAccount.withdraw(500);
+                    myAccount.deposit(200);
+                    myAccount.withdraw(300);
+                    myAccount.displayTransactionHistory();
+                    System.out.println("These are you last trasnsactions. Thank you!!");
+                    break;
+
+                } else {
+                    throw new Exception("Invalid credentials");
+
+                }
+            }
+
+            catch (Exception e) {
+                System.out.println("Error " + e.getMessage());
+            }
+        }
+        scanner.close();
 
     }
 }
