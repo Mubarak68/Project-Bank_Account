@@ -40,4 +40,10 @@ public class BankSingleton {
         return instance;
     }
 
+    // public void authUserSignIn() {
+    // if (username.equals(getUsername()) && password.equals(getPassword()) &&
+    // bankAccount.equals(bankAccount)) {
+    // System.out.println("User is Authenticated");
+    // }
+    // }
 }
