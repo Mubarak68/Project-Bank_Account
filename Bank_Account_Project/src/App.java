@@ -12,17 +12,19 @@ public class App {
             try {
                 System.out.print("Enter account number: ");
                 String accountNumber = scanBankAccount.nextLine();
+                BankAccount myAccount = new BankAccount(accountNumber);
                 singleton1.setBankAccount(accountNumber);
                 user1.getAccount();
-                BankAccount myAccount = new BankAccount(accountNumber);
+
                 System.out.println("Enter your username: ");
+                String user1Scanner = scanBankAccount.nextLine();
                 singleton1.setUsername(accountNumber);
                 user1.getUsername();
-                String user1Scanner = scanBankAccount.nextLine();
+
                 System.out.println("Enter password: ");
+                String passwordScanner = scanBankAccount.nextLine();
                 singleton1.setPassword(accountNumber);
                 user1.getPassword();
-                String passwordScanner = scanBankAccount.nextLine();
 
                 if (accountNumber.equals(accountNumber) && passwordScanner.equals(user1.getPassword())
                         && user1Scanner.equals(user1.getUsername())) {
@@ -41,9 +43,22 @@ public class App {
             }
 
             catch (Exception e) {
-                System.out.println("Error " + e.getMessage());
+                System.out.println(
+                        "Error " + e.getMessage() + "\n"
+                                + "Sorry the account number, username, or password is wrong. ");
 
             }
+        }
+        System.out.println("Do you want to make a new account ? ");
+        Scanner answerKey = new Scanner(System.in);
+        boolean answerScanner = answerKey.nextBoolean();
+        if (answerScanner) {
+            System.out.println("Enter your account number: ");
+            String number = answerKey.nextLine();
+            BankAccount newBankAccount1 = new BankAccount(number);
+            UserClass user2 = new UserClass("User2", "paasword", newBankAccount1);
+            BankSingleton singleton2 = BankSingleton.getInstance();
+
         }
         scanBankAccount.close();
 

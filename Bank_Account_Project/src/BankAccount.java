@@ -50,4 +50,5 @@ class BankAccount {
         }
         return instance;
     }
+
 }
